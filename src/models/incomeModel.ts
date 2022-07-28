@@ -3,11 +3,16 @@ import mongoose from "mongoose";
 const IncomeSchema = new mongoose.Schema(
     {
         amount: {
-            type: Number,
-            required: true
+            type: Number
+        },
+        source: {
+            type: String
         },
         time: {
-            type:   Date
+            type: Date
+        },
+        description: {
+            type: String
         }
     },
     { timestamps: true }

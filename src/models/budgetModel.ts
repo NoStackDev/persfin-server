@@ -9,7 +9,17 @@ const BudgetSchema = new mongoose.Schema({
     expenditures: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "expenditure"
-    }]
+    }],
+    balance: {
+        type: Number,
+        default: 0.00
+    },
+    month: {
+        type: Number
+    },
+    year: {
+        type: Number
+    }
 },
 { timestamps: true }
 )

@@ -1,19 +1,46 @@
-// const express = require('express')
-// const { ApolloServer } = require('apollo-server-express')
 import express from "express"
+import http from "http"
 import { ApolloServer } from "apollo-server-express";
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import typeDefs from "./schema/typeDefs";
-import mongoose from "mongoose";
+import resolvers from "./schema/resolvers";
 
 
-const startServer = async (): Promise<void> => {
-    const app = express()
-    const apolloServer = new ApolloServer({typeDefs, resolvers})
+const listen = async (PORT: number): Promise<void> => {
 
-    await apolloServer.start()
-    await mongoose.connect('mongodb://127.0.0.1:27017/persfin')
+    try {
 
-    apolloServer.applyMiddleware({app})
+        const app = express()
+        const httpServer = http.createServer(app)
+
+        const server = new ApolloServer({
+            typeDefs,
+            resolvers,
+            plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+          })
+
+          await server.start()
+        
+          server.applyMiddleware({ app })
+        
+          return new Promise((resolve, reject) => {
+            httpServer.listen(PORT).once('listening', resolve).once('error', reject)
+          })
+        }
+         catch(err: any) {
+        console.log(err.message)
+    }
+   
 }
 
-startServer()
+
+const main = async (): Promise<void> => {
+    try {
+        await listen(4000)
+        console.log('🚀 Server is ready at http://localhost:4000/graphql')
+      } catch (err) {
+        console.error('💀 Error starting the node server', err)
+      }
+}
+
+main()

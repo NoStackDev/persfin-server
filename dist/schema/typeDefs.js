@@ -1,8 +1,5 @@
 import { gql } from "apollo-server-core";
-
-
-
-const typeDefs = gql`
+const typeDefs = gql `
 
     type Income {
         amount: Float!
@@ -28,5 +25,5 @@ const typeDefs = gql`
         expenditures: [Expenditure]
     }
 
-`
-export default typeDefs
+`;
+export default typeDefs;
