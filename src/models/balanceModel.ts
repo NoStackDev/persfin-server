@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Balance = new mongoose.Schema({
+const BalanceSchema = new mongoose.Schema({
     amount: {
         type: Number,
         default: 0.00
@@ -9,3 +9,5 @@ const Balance = new mongoose.Schema({
 },
     {timestamps: true}
 )
+
+export default mongoose.model("Balance", BalanceSchema)

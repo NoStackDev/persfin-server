@@ -9,7 +9,7 @@ const ExpenseSchema = new mongoose.Schema({
         ref: "ExpenseCategory"
     },
     duration: {
-type: Date
+        type: Date
     },
     description: {
         type: String

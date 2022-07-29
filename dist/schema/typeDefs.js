@@ -3,26 +3,48 @@ const typeDefs = gql `
 
     type Income {
         amount: Float!
-        source: String
-        time: String
+        category: IncomeCategory
         description: String
     }
 
-    type Expenditure {
+    type Expense {
         amount: Float!
-        category: [ExpenditureCategory]
+        category: [ExpenseCategory]
+        description: String
+        receiptImage: String
     }
 
-    enum ExpenditureCategory {
-        FOOD
-        TRANSPORTATION
-        RENT
-        MISC
+    type IncomeCategory {
+        title: String
+        description: String
+    }
+
+    type ExpenseCategory {
+        title: String
+        description: String
+    }
+
+    input IncomeInput {
+        amount: String
+        description:String
+    }
+
+    input ExpenseInput {
+        amount: String
+        description: String
+        receiptImage: String    
     }
 
     type Query {
         incomes: [Income]
-        expenditures: [Expenditure]
+        expenses: [Expense]
+    }
+
+    type Mutation {
+        addIncome(data: IncomeInput): Income
+        addIncomeCategory(title: String, description: String): IncomeCategory
+        addExpense(data: ExpenseInput): Expense
+        addExpenseCategory(title: String, description: String): ExpenseCategory
     }
 
 `;
