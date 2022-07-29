@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
+
 const ExpenseSchema = new mongoose.Schema({
     amount: {
         type: Number
     },
-    outflowCategory: {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "ExpenseCategory"
+    },
+    duration: {
+type: Date
     },
     description: {
         type: String
@@ -20,5 +24,8 @@ const ExpenseSchema = new mongoose.Schema({
     receiptImage: {
         type: String
     }
-}, { timestamps: true });
-export default mongoose.model("Expense", ExpenseSchema);
+}, 
+{ timestamps: true }
+)
+
+export default mongoose.model("Expense", ExpenseSchema)

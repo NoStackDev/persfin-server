@@ -1,6 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 
-const OutflowCategorySchema = new mongoose.Schema({
+const ExpenseCategorySchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -10,4 +10,4 @@ const OutflowCategorySchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
-export default mongoose.model("OutflowCategory", OutflowCategorySchema)
+export default mongoose.model("ExpenseCategory", ExpenseCategorySchema)

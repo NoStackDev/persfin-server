@@ -3,8 +3,9 @@ const IncomeSchema = new mongoose.Schema({
     amount: {
         type: Number
     },
-    source: {
-        type: String
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "IncomeCategory"
     },
     time: {
         type: Date

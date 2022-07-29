@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
-const InflowSchema = new mongoose.Schema({
+const IncomeSchema = new mongoose.Schema({
     amount: {
         type: Number
     },
-    source: {
-        type: String
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "IncomeCategory"
     },
     time: {
         type: Date
@@ -20,4 +21,4 @@ const InflowSchema = new mongoose.Schema({
         type: String
     }
 }, { timestamps: true });
-export default mongoose.model("Inflow", InflowSchema);
+export default mongoose.model("Income", IncomeSchema);
