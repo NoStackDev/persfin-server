@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const IncomeSchema = new mongoose.Schema({
+const InflowSchema = new mongoose.Schema({
     amount: {
         type: Number
     },
@@ -20,4 +20,4 @@ const IncomeSchema = new mongoose.Schema({
         type: String
     }
 }, { timestamps: true });
-export default mongoose.model("Income", IncomeSchema);
+export default mongoose.model("Inflow", InflowSchema);

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const IncomeSchema = new mongoose.Schema(
+const InflowSchema = new mongoose.Schema(
     {
         amount: {
             type: Number
@@ -11,6 +11,13 @@ const IncomeSchema = new mongoose.Schema(
         time: {
             type: Date
         },
+        recurring: {
+            type: Boolean,
+            default: false,
+            recur: {
+                type: Date
+            }
+        }, 
         description: {
             type: String
         }
@@ -18,4 +25,4 @@ const IncomeSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-export default mongoose.model("Income", IncomeSchema)
+export default mongoose.model("Inflow", InflowSchema)

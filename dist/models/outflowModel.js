@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
-const IncomeSchema = new mongoose.Schema({
+const OutflowSchema = new mongoose.Schema({
     amount: {
         type: Number
     },
-    source: {
-        type: String
+    outflowCategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "OutflowCategory"
     },
-    time: {
-        type: Date
+    description: {
+        type: String
     },
     recurring: {
         type: Boolean,
@@ -16,8 +17,8 @@ const IncomeSchema = new mongoose.Schema({
             type: Date
         }
     },
-    description: {
+    receiptImage: {
         type: String
     }
 }, { timestamps: true });
-export default mongoose.model("Income", IncomeSchema);
+export default mongoose.model("Outflow", OutflowSchema);

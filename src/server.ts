@@ -2,6 +2,7 @@ import express from "express"
 import http from "http"
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import mongoose from "mongoose";
 import typeDefs from "./schema/typeDefs";
 import resolvers from "./schema/resolvers";
 
@@ -36,6 +37,7 @@ const listen = async (PORT: number): Promise<void> => {
 
 const main = async (): Promise<void> => {
     try {
+        await mongoose.connect('mongodb://127.0.0.1:27017/persfin')
         await listen(4000)
         console.log('🚀 Server is ready at http://localhost:4000/graphql')
       } catch (err) {

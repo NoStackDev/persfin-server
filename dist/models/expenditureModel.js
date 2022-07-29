@@ -10,6 +10,13 @@ const ExpenditureSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    recurring: {
+        type: Boolean,
+        default: false,
+        recur: {
+            type: Date
+        }
+    },
     receiptImage: {
         type: String
     }
