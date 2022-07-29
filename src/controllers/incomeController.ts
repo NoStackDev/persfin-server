@@ -11,4 +11,11 @@ const createIncomeCategory = async (args: {title: string, description: string}) 
     } catch(err:any){ console.log(err.message)}
 }
 
-export {createIncomeCategory}
+const getIncomeCategories = async () => {
+    try {
+        const categories = await IncomeCategory.find()
+        return categories
+    } catch(err: any) {console.log(err.message)}
+}
+
+export {createIncomeCategory, getIncomeCategories}

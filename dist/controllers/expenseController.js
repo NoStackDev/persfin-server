@@ -18,4 +18,13 @@ const createExpenseCategory = (args) => __awaiter(void 0, void 0, void 0, functi
         console.log(err.message);
     }
 });
-export { createExpenseCategory };
+const getExpenseCategories = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const categories = yield ExpenseCategory.find();
+        return categories;
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+});
+export { createExpenseCategory, getExpenseCategories };

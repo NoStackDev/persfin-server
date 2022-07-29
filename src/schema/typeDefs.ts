@@ -18,11 +18,13 @@ const typeDefs = gql`
     }
 
     type IncomeCategory {
+        id: ID
         title: String
         description: String
     }
 
     type ExpenseCategory {
+        id: ID
         title: String
         description: String
     }
@@ -40,7 +42,10 @@ const typeDefs = gql`
 
     type Query {
         incomes: [Income]
+        incomeCategories: [IncomeCategory]
         expenses: [Expense]
+        expenseCategories: [ExpenseCategory]
+        balance: balance
     }
 
     type Mutation {

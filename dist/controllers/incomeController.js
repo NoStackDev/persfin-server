@@ -18,4 +18,13 @@ const createIncomeCategory = (args) => __awaiter(void 0, void 0, void 0, functio
         console.log(err.message);
     }
 });
-export { createIncomeCategory };
+const getIncomeCategories = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const categories = yield IncomeCategory.find();
+        return categories;
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+});
+export { createIncomeCategory, getIncomeCategories };

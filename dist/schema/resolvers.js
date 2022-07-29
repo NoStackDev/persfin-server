@@ -8,20 +8,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import incomes from "./data";
-import { createIncomeCategory } from "../controllers/incomeController";
-import { createExpenseCategory } from "../controllers/expenseController";
+import { createIncomeCategory, getIncomeCategories } from "../controllers/incomeController";
+import { createExpenseCategory, getExpenseCategories } from "../controllers/expenseController";
 const resolvers = {
     Query: {
         incomes() {
             return incomes;
+        },
+        incomeCategories() {
+            return __awaiter(this, void 0, void 0, function* () {
+                const categories = yield getIncomeCategories();
+                return categories;
+            });
+        },
+        expenseCategories() {
+            return __awaiter(this, void 0, void 0, function* () {
+                const categories = yield getExpenseCategories();
+                return categories;
+            });
         }
     },
     Mutation: {
         addIncomeCategory(parent, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const incomeCategory = yield createIncomeCategory({ title: args.title, description: args.description });
-                    return incomeCategory;
+                    const category = yield createIncomeCategory({ title: args.title, description: args.description });
+                    return category;
                 }
                 catch (err) {
                     console.log(err.message);
@@ -31,8 +43,8 @@ const resolvers = {
         addExpenseCategory(parent, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const expenseCategory = yield createExpenseCategory({ title: args.title, description: args.description });
-                    return expenseCategory;
+                    const category = yield createExpenseCategory({ title: args.title, description: args.description });
+                    return category;
                 }
                 catch (err) {
                     console.log(err.message);

@@ -10,4 +10,11 @@ const createExpenseCategory = async (args: {title: string, description: string})
     } catch(err:any){ console.log(err.message)}
 }
 
-export {createExpenseCategory}
+const getExpenseCategories = async () => {
+    try {
+        const categories = await ExpenseCategory.find()
+        return categories
+    } catch(err: any) {console.log(err.message)}
+}
+
+export {createExpenseCategory, getExpenseCategories}
