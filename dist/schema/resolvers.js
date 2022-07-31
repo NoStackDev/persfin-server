@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import incomes from "./data";
-import { createIncomeCategory, getIncomeCategories } from "../controllers/incomeController";
+import { createIncome, createIncomeCategory, getIncomeCategories } from "../controllers/incomeController";
 import { createExpenseCategory, getExpenseCategories } from "../controllers/expenseController";
 const resolvers = {
     Query: {
@@ -29,6 +29,12 @@ const resolvers = {
         }
     },
     Mutation: {
+        addIncome(parent, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const income = yield createIncome({ amount: args.amount, description: args.description });
+                return income;
+            });
+        },
         addIncomeCategory(parent, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {

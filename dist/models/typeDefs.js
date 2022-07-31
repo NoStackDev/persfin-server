@@ -2,14 +2,16 @@ import { gql } from "apollo-server-core";
 const typeDefs = gql `
 
     type Income {
+        id: ID
         amount: Float!
         category: IncomeCategory
         description: String
     }
 
     type Expense {
+        id: ID
         amount: Float!
-        category: [ExpenseCategory]
+        category: ExpenseCategory
         description: String
         receiptImage: String
     }
@@ -26,27 +28,36 @@ const typeDefs = gql `
         description: String
     }
 
-
-
-    input ExpenseInput {
-        amount: String
+    type Budget {
+        id: ID
+        title: String
+        total: Float
         description: String
-        receiptImage: String    
+        expenses: [Expense]
     }
+
+
 
     type Query {
         incomes: [Income]
         incomeCategories: [IncomeCategory]
         expenses: [Expense]
         expenseCategories: [ExpenseCategory]
-        
+        budgets: [Budget]
+    }
+
+    input ExpenseObjArray {
+        amount: Float
+        description: String
+        categoryId: ID
     }
 
     type Mutation {
-        addIncome(amount: Float, description: String): Income
+        addIncome(amount: Float, description: String, categoryId: ID): Income
         addIncomeCategory(title: String, description: String): IncomeCategory
-        addExpense(data: ExpenseInput): Expense
+        addExpense(amount: Float, description: String, categoryId: ID): Expense
         addExpenseCategory(title: String, description: String): ExpenseCategory
+        addBudget(title: String, total: Float, expenses: [ExpenseObjArray], description: String ): Budget
     }
 
 `;

@@ -7,18 +7,16 @@ const ExpenseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "ExpenseCategory"
     },
-    duration: {
-        type: Date
+    budget: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Budget"
     },
     description: {
         type: String
     },
     recurring: {
-        type: Boolean,
-        default: false,
-        recur: {
-            type: Date
-        }
+        isRecurring: { type: Boolean, default: false },
+        recurEvery: { type: Date }
     },
     receiptImage: {
         type: String

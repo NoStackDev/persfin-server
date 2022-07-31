@@ -12,8 +12,8 @@ import http from "http";
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import mongoose from "mongoose";
-import typeDefs from "./schema/typeDefs";
-import resolvers from "./schema/resolvers";
+import typeDefs from "./models/typeDefs";
+import resolvers from "./resolvers";
 const listen = (PORT) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const app = express();

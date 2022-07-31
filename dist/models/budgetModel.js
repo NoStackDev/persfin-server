@@ -1,22 +1,17 @@
 import mongoose from "mongoose";
 const BudgetSchema = new mongoose.Schema({
-    expenditures: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "expenditure"
-        }],
-    amount: {
-        type: Number,
-        default: 0.00
+    title: {
+        type: String
+    },
+    total: {
+        type: Number
     },
     recurring: {
-        type: Boolean,
-        default: false,
-        recur: {
-            type: Date
-        }
+        isRecurring: { type: Boolean, default: false },
+        recurEvery: { type: Date }
     },
-    budgetDuration: {
-        type: Date
+    description: {
+        type: String
     }
-}, { timestamps: true });
+});
 export default mongoose.model("Budget", BudgetSchema);

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { IncomeInterface } from "./interfaces";
 
-const IncomeSchema = new mongoose.Schema(
+const IncomeSchema = new mongoose.Schema<IncomeInterface>(
     {
         amount: {
             type: Number
@@ -13,12 +14,9 @@ const IncomeSchema = new mongoose.Schema(
             type: Date
         },
         recurring: {
-            type: Boolean,
-            default: false,
-            recur: {
-                type: Date
-            }
-        }, 
+            isRecurring: {type: Boolean, default: false},
+            recurEvery: {type: Date}
+        },
         description: {
             type: String
         }
@@ -26,4 +24,4 @@ const IncomeSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-export default mongoose.model("Income", IncomeSchema)
+export default mongoose.model<IncomeInterface>("Income", IncomeSchema)

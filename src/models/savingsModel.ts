@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { SavingInterface } from "./interfaces";
 
-const SavingSchema = new mongoose.Schema({
+const SavingSchema = new mongoose.Schema<SavingInterface>({
     amount: {
         type: Number,
         default: 0.00
@@ -9,4 +10,4 @@ const SavingSchema = new mongoose.Schema({
 { timestamps: true }
 )
 
-export default mongoose.model("Saving", SavingSchema)
+export default mongoose.model<SavingInterface>("Saving", SavingSchema)

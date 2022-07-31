@@ -1,6 +1,7 @@
 import mongoose, { Mongoose } from "mongoose";
+import { IncomeCategoryInterface } from "./interfaces";
 
-const IncomeCategorySchema = new mongoose.Schema({
+const IncomeCategorySchema = new mongoose.Schema<IncomeCategoryInterface>({
     title: {
         type: String,
         required: true
@@ -10,4 +11,4 @@ const IncomeCategorySchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
-export default mongoose.model("IncomeCategory", IncomeCategorySchema)
+export default mongoose.model<IncomeCategoryInterface>("IncomeCategory", IncomeCategorySchema)

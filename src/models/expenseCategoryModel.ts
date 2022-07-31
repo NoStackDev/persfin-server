@@ -1,6 +1,7 @@
 import mongoose, { Mongoose } from "mongoose";
+import { ExpenseCategoryInterface } from "./interfaces";
 
-const ExpenseCategorySchema = new mongoose.Schema({
+const ExpenseCategorySchema = new mongoose.Schema<ExpenseCategoryInterface>({
     title: {
         type: String,
         required: true
@@ -10,4 +11,4 @@ const ExpenseCategorySchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
-export default mongoose.model("ExpenseCategory", ExpenseCategorySchema)
+export default mongoose.model<ExpenseCategoryInterface>("ExpenseCategory", ExpenseCategorySchema)

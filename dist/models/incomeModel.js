@@ -11,11 +11,8 @@ const IncomeSchema = new mongoose.Schema({
         type: Date
     },
     recurring: {
-        type: Boolean,
-        default: false,
-        recur: {
-            type: Date
-        }
+        isRecurring: { type: Boolean, default: false },
+        recurEvery: { type: Date }
     },
     description: {
         type: String
