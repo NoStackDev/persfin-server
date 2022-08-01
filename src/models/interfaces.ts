@@ -3,7 +3,7 @@ import { Types } from "mongoose";
 interface DocumentResult<T> {
     _doc: T;
     _id: Types.ObjectId;
-    userId: Types.ObjectId;
+    user: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }

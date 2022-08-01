@@ -14,6 +14,10 @@ const BudgetSchema = new mongoose.Schema<BudgetInterface>({
     },
     description: {
         type: String
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 }, 
     {timestamps: true}

@@ -22,6 +22,10 @@ const ExpenseSchema = new mongoose.Schema<ExpenseInterface>({
     },
     receiptImage: {
         type: String
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 }, 
 { timestamps: true }

@@ -8,6 +8,10 @@ const ExpenseCategorySchema = new mongoose.Schema<ExpenseCategoryInterface>({
     },
     description: {
         type: String
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 }, {timestamps: true})
 

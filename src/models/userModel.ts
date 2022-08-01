@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { UserInterface } from "./interfaces";
 
 
-const UserSchema = new mongoose.Schema<UserInterface>({
+const UserSchema = new mongoose.Schema<Omit<UserInterface, "user">>({
     firstname: {
         type: String,
         required: true,
@@ -25,4 +25,4 @@ const UserSchema = new mongoose.Schema<UserInterface>({
 }, {timestamps: true})
 
 
-export default mongoose.model<UserInterface>('User', UserSchema)
+export default mongoose.model<Omit<UserInterface, "user">>('User', UserSchema)
