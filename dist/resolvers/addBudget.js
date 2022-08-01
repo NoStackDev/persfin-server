@@ -24,11 +24,11 @@ const addBudget = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             expensesId.push(expense._id);
             expense.category = new mongoose.Types.ObjectId(expenseObj.categoryId);
             expense.budget = budget._id;
-            expenses.push(Object.assign({}, expense._doc));
+            expenses.push(Object.assign(Object.assign({}, expense._doc), { id: expense._id }));
             yield expense.save();
         }));
         yield budget.save();
-        return Object.assign(Object.assign({}, budget._doc), { expenses });
+        return Object.assign(Object.assign({ id: budget._id }, budget._doc), { expenses });
     }
     catch (err) {
         expensesId.forEach((expenseId) => __awaiter(void 0, void 0, void 0, function* () {

@@ -9,21 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import Budget from "../models/budgetModel";
 import Expense from "../models/expenseModel";
+const retrieveExpenses = (budget) => __awaiter(void 0, void 0, void 0, function* () {
+    const expenses = yield Expense.find({ budget: budget._id });
+    console.log(expenses);
+    return Object.assign(Object.assign({}, budget._doc), { expenses, id: budget._id });
+});
 const getBudget = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const _budgets = yield Budget.find();
-        let budgets = [];
-        _budgets.forEach((budget) => __awaiter(void 0, void 0, void 0, function* () {
-            const _expenses = yield Expense.find({ budget: budget._id }).exec();
-            const expenses = [];
-            _expenses.forEach(expense => {
-                expenses.push(expense._doc);
-            });
-            budgets.push(Object.assign(Object.assign({}, budget._doc), { expenses }));
-            console.log(budgets);
+        const budgetsPromises = _budgets.map((_budget) => __awaiter(void 0, void 0, void 0, function* () {
+            const budget = yield retrieveExpenses(_budget);
+            return budget;
         }));
-        // console.log(budgets)
-        // return []
+        const budgets = yield Promise.all(budgetsPromises);
+        return budgets;
     }
     catch (err) {
         console.log(err.message);

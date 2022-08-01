@@ -15,6 +15,8 @@ const BudgetSchema = new mongoose.Schema<BudgetInterface>({
     description: {
         type: String
     }
-})
+}, 
+    {timestamps: true}
+)
 
 export default mongoose.model<BudgetInterface>("Budget", BudgetSchema)

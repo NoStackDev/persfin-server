@@ -2,6 +2,8 @@ import { Types } from "mongoose";
 
 interface DocumentResult<T> {
     _doc: T;
+    _id: Types.ObjectId;
+    id?: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }
