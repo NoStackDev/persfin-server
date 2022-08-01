@@ -1,26 +1,30 @@
-import { AnyMxRecord } from "dns";
-import { Types } from "mongoose";
 import Budget from "../models/budgetModel";
 import Expense from "../models/expenseModel";
 import { BudgetInterface, ExpenseInterface } from "../models/interfaces";
-import getExpenseCategories from "./getExpenseCategories";
+
 
 interface _BudgetInterface extends BudgetInterface {
     expenses?: Array<ExpenseInterface>
 }
 
 const retrieveExpenses = async (budget: _BudgetInterface) => {
-    const expenses = await Expense.find({budget: budget._id})
-    console.log(expenses)
-    return {...budget._doc, expenses, id: budget._id}
+    const _expenses = await Expense.find({budget: budget._id})
+    const categoryPromises = _expenses.map( async _expense => {
+        return await _expense.populate('category')
+    })
+    const _newExpenses = await Promise.all(categoryPromises)
+    const budgetPromises = _newExpenses.map( async _expense => {
+        return await _expense.populate('budget')
+    })
+    const expenses = await Promise.all(budgetPromises)
+    return {...budget._doc, expenses}
 }
 
 const getBudget = async () => {
     try{
         const _budgets = await Budget.find()
-        const budgetsPromises: any = _budgets.map(async _budget => {
-            const budget = await retrieveExpenses(_budget)
-            return budget
+        const budgetsPromises = _budgets.map(async _budget => {
+            return await retrieveExpenses(_budget)
         })
 
         const budgets: Array<_BudgetInterface> = await Promise.all(budgetsPromises)

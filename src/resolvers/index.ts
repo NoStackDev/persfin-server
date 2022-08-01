@@ -1,3 +1,5 @@
+import addUser from "./addUser";
+import users from "./getUsers"
 import incomes from "./getIncomes";
 import addIncome from "./addIncome";
 import incomeCategories from "./getIncomeCategories";
@@ -12,6 +14,7 @@ import addBudget from "./addBudget";
 
 const resolvers = {
     Query: {
+        users,
         incomes,
         incomeCategories,
         expenses,
@@ -20,6 +23,7 @@ const resolvers = {
     },
 
     Mutation: {
+        addUser,
         addIncome,
         addIncomeCategory,
         addExpense,

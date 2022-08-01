@@ -10,16 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import Budget from "../models/budgetModel";
 import Expense from "../models/expenseModel";
 const retrieveExpenses = (budget) => __awaiter(void 0, void 0, void 0, function* () {
-    const expenses = yield Expense.find({ budget: budget._id });
-    console.log(expenses);
-    return Object.assign(Object.assign({}, budget._doc), { expenses, id: budget._id });
+    const _expenses = yield Expense.find({ budget: budget._id });
+    const categoryPromises = _expenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield _expense.populate('category');
+    }));
+    const _newExpenses = yield Promise.all(categoryPromises);
+    const budgetPromises = _newExpenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield _expense.populate('budget');
+    }));
+    const expenses = yield Promise.all(budgetPromises);
+    return Object.assign(Object.assign({}, budget._doc), { expenses });
 });
 const getBudget = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const _budgets = yield Budget.find();
         const budgetsPromises = _budgets.map((_budget) => __awaiter(void 0, void 0, void 0, function* () {
-            const budget = yield retrieveExpenses(_budget);
-            return budget;
+            return yield retrieveExpenses(_budget);
         }));
         const budgets = yield Promise.all(budgetsPromises);
         return budgets;

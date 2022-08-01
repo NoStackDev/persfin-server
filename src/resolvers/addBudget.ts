@@ -23,7 +23,7 @@ const addBudget = async(_:any, args: {title: string, total: number, description:
             expensesId.push(expense._id)
             expense.category = new mongoose.Types.ObjectId(expenseObj.categoryId)
             expense.budget = budget._id
-            expenses.push({...expense._doc, id:expense._id })
+            expenses.push(expense._doc)
             await expense.save()
         })
         

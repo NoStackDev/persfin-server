@@ -3,9 +3,17 @@ import { Types } from "mongoose";
 interface DocumentResult<T> {
     _doc: T;
     _id: Types.ObjectId;
-    id?: Types.ObjectId;
+    userId: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface UserInterface extends DocumentResult<UserInterface> {
+    firstname: string;
+    lastname: string;
+    othernames?: string;
+    email: string;
+    password: string;
 }
 
 export interface BalanceInterface extends DocumentResult<BalanceInterface> {
