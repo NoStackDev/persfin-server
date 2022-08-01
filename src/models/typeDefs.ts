@@ -14,6 +14,7 @@ const typeDefs = gql`
 
     type Income {
         _id: ID
+        user: User
         amount: Float!
         category: IncomeCategory
         description: String
@@ -21,6 +22,7 @@ const typeDefs = gql`
 
     type Expense {
         _id: ID
+        user: User
         amount: Float!
         category: ExpenseCategory
         description: String
@@ -30,18 +32,21 @@ const typeDefs = gql`
 
     type IncomeCategory {
         _id: ID
+        user: User
         title: String
         description: String
     }
 
     type ExpenseCategory {
         _id: ID
+        user: User
         title: String
         description: String
     }
 
     type Budget {
         _id: ID
+        user: User
         title: String
         total: Float
         description: String
