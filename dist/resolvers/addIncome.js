@@ -12,15 +12,15 @@ import IncomeCategory from "../models/incomeCategoryModel";
 const addIncome = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const income = new Income(Object.assign({}, args));
-        const category = yield IncomeCategory.findById(args.categoryId);
+        const category = yield IncomeCategory.findById(args.category);
         if (!category) {
             return { body: "error category not found" };
         }
         income.category = category._id;
         yield income.populate('category');
-        // await income.save()
-        // return income
-        console.log(income);
+        yield income.populate('user');
+        yield income.save();
+        return income;
     }
     catch (err) {
         console.log(err.message);

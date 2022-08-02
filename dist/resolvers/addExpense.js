@@ -9,17 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import Expense from "../models/expenseModel";
 import ExpenseCategory from "../models/expenseCategoryModel";
+import User from "../models/userModel";
 const addExpense = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const expense = new Expense(Object.assign({}, args));
-        const category = yield ExpenseCategory.findById(args.categoryId);
-        if (!category) {
+        const user = yield User.findById(args.user);
+        const category = yield ExpenseCategory.findById(args.category);
+        if (!category || !user) {
             return { body: "error category not found" };
         }
+        expense.user = user._id;
         expense.category = category._id;
-        yield expense.populate('category');
         yield expense.save();
-        return expense;
+        return Object.assign(Object.assign({}, expense._doc), { user, category });
     }
     catch (err) {
         console.log(err.message);

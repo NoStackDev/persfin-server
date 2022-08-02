@@ -27,7 +27,7 @@ const typeDefs = gql`
         category: ExpenseCategory
         description: String
         receiptImage: String
-        budget: Budget
+        plan: Plan
     }
 
     type IncomeCategory {
@@ -44,7 +44,7 @@ const typeDefs = gql`
         description: String
     }
 
-    type Budget {
+    type Plan {
         _id: ID
         user: User
         title: String
@@ -57,11 +57,11 @@ const typeDefs = gql`
 
     type Query {
         users: [User]
-        incomes: [Income]
+        incomes(user: ID): [Income]
         incomeCategories(user: ID): [IncomeCategory]
-        expenses: [Expense]
+        expenses(user: ID): [Expense]
         expenseCategories(user: ID): [ExpenseCategory]
-        budgets: [Budget]
+        plans(user: ID): [Plan]
     }
 
     input ExpenseObjArray {
@@ -76,7 +76,7 @@ const typeDefs = gql`
         addIncomeCategory(title: String, description: String, user: ID): IncomeCategory
         addExpense(amount: Float, description: String, user: ID, category: ID): Expense
         addExpenseCategory(title: String, description: String, user: ID): ExpenseCategory
-        addBudget(title: String, total: Float, expenses: [ExpenseObjArray], description: String, user: ID): Budget
+        addPlan(title: String, total: Float, expenses: [ExpenseObjArray], description: String, user: ID): Plan
     }
 
 `

@@ -1,19 +1,21 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import Expense from "../models/expenseModel";
 import ExpenseCategory from "../models/expenseCategoryModel";
+import User from "../models/userModel";
 
 
-const addExpense = async (_: any, args: {amount: number, description: string, categoryId: string}) => {
+const addExpense = async (_: any, args: {amount: number, description: string, user: Types.ObjectId, category: Types.ObjectId}) => {
     try {
         const expense = new Expense({...args})
-        const category = await ExpenseCategory.findById(args.categoryId)
-        if (!category) {
+        const user = await User.findById(args.user)
+        const category = await ExpenseCategory.findById(args.category)
+        if (!category || !user) {
             return {body: "error category not found"}
         }
+        expense.user = user._id
         expense.category = category._id
-        await expense.populate('category')
         await expense.save()
-        return expense
+        return {...expense._doc, user, category}
     } catch(err: any) {
         console.log(err.message)
     }

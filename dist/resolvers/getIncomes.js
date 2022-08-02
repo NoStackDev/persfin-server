@@ -8,13 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import Income from "../models/incomeModel";
-const getIncomes = () => __awaiter(void 0, void 0, void 0, function* () {
+const getIncomes = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const _incomes = yield Income.find();
-        const incomes = _incomes.map((income) => __awaiter(void 0, void 0, void 0, function* () {
-            yield income.populate('category');
-            return income;
+        const _incomes = yield Income.find({ user: args.user });
+        const incomesUserPromises = _incomes.map((_income) => __awaiter(void 0, void 0, void 0, function* () {
+            yield _income.populate('user');
+            yield _income.populate('category');
+            return _income;
         }));
+        const incomes = yield Promise.all(incomesUserPromises);
         return incomes;
     }
     catch (err) {
