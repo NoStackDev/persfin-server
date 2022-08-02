@@ -9,9 +9,9 @@ const ExpenseSchema = new mongoose.Schema<ExpenseInterface>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "ExpenseCategory"
     },
-    budget: {
+    plan: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Budget"
+        ref: "Plan"
     },
     description: {
         type: String

@@ -8,8 +8,8 @@ import expenses from "./getExpenses";
 import addExpense from "./addExpense";
 import expenseCategories from "./getExpenseCategories";
 import addExpenseCategory from "./addExpenseCategory";
-import budgets from "./getBudgets";
-import addBudget from "./addBudget";
+import plans from "./getPlans";
+import addPlan from "./addPlan";
 
 
 const resolvers = {
@@ -19,7 +19,7 @@ const resolvers = {
         incomeCategories,
         expenses,
         expenseCategories,
-        budgets
+        plans
     },
 
     Mutation: {
@@ -28,7 +28,7 @@ const resolvers = {
         addIncomeCategory,
         addExpense,
         addExpenseCategory,
-        addBudget
+        addPlan
     }
 }
 

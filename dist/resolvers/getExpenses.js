@@ -11,11 +11,9 @@ import Expense from "../models/expenseModel";
 const getEpenses = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const _expenses = yield Expense.find();
-        const expenses = _expenses.map((expense) => __awaiter(void 0, void 0, void 0, function* () {
-            expense.populate('category');
-            return expense;
+        const userPromises = _expenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
+            return yield _expense.populate('user');
         }));
-        return expenses;
     }
     catch (err) {
         console.log(err.message);

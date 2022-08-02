@@ -7,33 +7,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Budget from "../models/budgetModel";
+import Plan from "../models/planModel";
 import Expense from "../models/expenseModel";
-const retrieveExpenses = (budget) => __awaiter(void 0, void 0, void 0, function* () {
-    const _expenses = yield Expense.find({ budget: budget._id });
+const retrieveExpenses = (plan) => __awaiter(void 0, void 0, void 0, function* () {
+    const _expenses = yield Expense.find({ plan: plan._id });
     // populate category field
     const categoryPromises = _expenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
         return yield _expense.populate('category');
     }));
     const _newExpenses = yield Promise.all(categoryPromises);
-    // populate budget field
-    const budgetPromises = _newExpenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
-        return yield _expense.populate('budget');
+    // populate plan field
+    const planPromises = _newExpenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield _expense.populate('plan');
     }));
-    const expenses = yield Promise.all(budgetPromises);
-    return Object.assign(Object.assign({}, budget._doc), { expenses });
+    const expenses = yield Promise.all(planPromises);
+    return Object.assign(Object.assign({}, plan._doc), { expenses });
 });
-const getBudget = () => __awaiter(void 0, void 0, void 0, function* () {
+const getPlans = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const _budgets = yield Budget.find();
-        const budgetsPromises = _budgets.map((_budget) => __awaiter(void 0, void 0, void 0, function* () {
-            return yield retrieveExpenses(_budget);
+        const _plans = yield Plan.find();
+        const plansPromises = _plans.map((_plan) => __awaiter(void 0, void 0, void 0, function* () {
+            return yield retrieveExpenses(_plan);
         }));
-        const budgets = yield Promise.all(budgetsPromises);
-        return budgets;
+        const plans = yield Promise.all(plansPromises);
+        return plans;
     }
     catch (err) {
         console.log(err.message);
     }
 });
-export default getBudget;
+export default getPlans;

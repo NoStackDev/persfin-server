@@ -10,9 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import IncomeCategory from "../models/incomeCategoryModel";
 const addIncomeCategory = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const income = new IncomeCategory(Object.assign({}, args));
-        yield income.save();
-        return income;
+        const category = new IncomeCategory(Object.assign({}, args));
+        yield category.save();
+        yield category.populate('user');
+        return category;
     }
     catch (err) {
         console.log(err.message);

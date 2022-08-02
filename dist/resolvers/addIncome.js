@@ -18,8 +18,9 @@ const addIncome = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
         }
         income.category = category._id;
         yield income.populate('category');
-        yield income.save();
-        return income;
+        // await income.save()
+        // return income
+        console.log(income);
     }
     catch (err) {
         console.log(err.message);

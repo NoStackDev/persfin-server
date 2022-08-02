@@ -20,7 +20,7 @@ export interface BalanceInterface extends DocumentResult<BalanceInterface> {
     amount: number
 }
 
-export interface BudgetInterface extends DocumentResult<BudgetInterface> {
+export interface PlanInterface extends DocumentResult<PlanInterface> {
     title: string;
     total: number;
     recurring?: {isRecurring: boolean, recurEvery: Date};
@@ -35,7 +35,7 @@ export interface ExpenseCategoryInterface extends DocumentResult<ExpenseCategory
 export interface ExpenseInterface extends DocumentResult<ExpenseInterface> {
     amount: number;
     category: Types.ObjectId;
-    budget: Types.ObjectId;
+    plan: Types.ObjectId;
     description?: string;
     recurring?: {isRecurring: boolean, recurEvery?: Date};
     receiptImage?: string

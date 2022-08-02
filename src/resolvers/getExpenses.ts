@@ -4,11 +4,10 @@ import Expense from "../models/expenseModel"
 const getEpenses = async () => {
     try {
         const _expenses = await Expense.find()
-        const expenses = _expenses.map(async expense => {
-            expense.populate('category')
-            return expense
+        const userPromises = _expenses.map(async _expense => {
+            return await _expense.populate('user')
         })
-        return expenses
+        
     } catch(err: any) {
         console.log(err.message)
     }

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { BudgetInterface } from "./interfaces";
+import { PlanInterface } from "./interfaces";
 
-const BudgetSchema = new mongoose.Schema<BudgetInterface>({
+const PlanSchema = new mongoose.Schema<PlanInterface>({
     title: {
         type:String
     },
@@ -23,4 +23,4 @@ const BudgetSchema = new mongoose.Schema<BudgetInterface>({
     {timestamps: true}
 )
 
-export default mongoose.model<BudgetInterface>("Budget", BudgetSchema)
+export default mongoose.model<PlanInterface>("Plan", PlanSchema)

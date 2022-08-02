@@ -1,11 +1,13 @@
+import { Types } from "mongoose";
 import IncomeCategory from "../models/incomeCategoryModel";
 
 
-const addIncomeCategory = async (_:any, args: {title: string, description: string}) => {
+const addIncomeCategory = async (_:any, args: {title: string, description: string, user: Types.ObjectId}) => {
     try {
-        const income = new IncomeCategory({...args})
-        await income.save()
-        return income
+        const category = new IncomeCategory({...args})
+        await category.save()
+        await category.populate('user')
+        return category
     } catch(err: any) {
         console.log(err.message)
     }

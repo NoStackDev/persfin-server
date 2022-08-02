@@ -55,9 +55,9 @@ const typeDefs = gql `
     type Query {
         users: [User]
         incomes: [Income]
-        incomeCategories: [IncomeCategory]
+        incomeCategories(user: ID): [IncomeCategory]
         expenses: [Expense]
-        expenseCategories: [ExpenseCategory]
+        expenseCategories(user: ID): [ExpenseCategory]
         budgets: [Budget]
     }
 
@@ -69,11 +69,11 @@ const typeDefs = gql `
 
     type Mutation {
         addUser(firstname: String, lastname: String, othername: String, email: String, password: String): User
-        addIncome(amount: Float, description: String, categoryId: ID): Income
-        addIncomeCategory(title: String, description: String): IncomeCategory
-        addExpense(amount: Float, description: String, categoryId: ID): Expense
-        addExpenseCategory(title: String, description: String): ExpenseCategory
-        addBudget(title: String, total: Float, expenses: [ExpenseObjArray], description: String ): Budget
+        addIncome(amount: Float, description: String, user: ID, category: ID): Income
+        addIncomeCategory(title: String, description: String, user: ID): IncomeCategory
+        addExpense(amount: Float, description: String, user: ID, category: ID): Expense
+        addExpenseCategory(title: String, description: String, user: ID): ExpenseCategory
+        addBudget(title: String, total: Float, expenses: [ExpenseObjArray], description: String, user: ID): Budget
     }
 
 `;

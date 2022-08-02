@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import ExpenseCategory from "../models/expenseCategoryModel";
-const getExpenseCategories = () => __awaiter(void 0, void 0, void 0, function* () {
+const getExpenseCategories = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const categories = yield ExpenseCategory.find();
+        const _categories = yield ExpenseCategory.find({ user: args.user });
+        const categoriesUserPromises = _categories.map((_category) => __awaiter(void 0, void 0, void 0, function* () {
+            return yield _category.populate('user');
+        }));
+        const categories = yield Promise.all(categoriesUserPromises);
         return categories;
     }
     catch (err) {

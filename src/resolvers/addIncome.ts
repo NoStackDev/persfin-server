@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
 import Income from "../models/incomeModel";
 import IncomeCategory from "../models/incomeCategoryModel";
+import { Types } from "mongoose";
 
 
-const addIncome = async (_: any, args: {amount: number, description: string, categoryId: string}) => {
+const addIncome = async (_: any, args: {amount: number, description: string, user: Types.ObjectId, categoryId: Types.ObjectId}) => {
     try {
         const income = new Income({...args})
         const category = await IncomeCategory.findById(args.categoryId)
@@ -12,8 +12,10 @@ const addIncome = async (_: any, args: {amount: number, description: string, cat
         }
         income.category = category._id
         await income.populate('category')
-        await income.save()
-        return income
+        // await income.save()
+        // return income
+        console.log(income)
+
     } catch(err: any) {
         console.log(err.message)
     }
