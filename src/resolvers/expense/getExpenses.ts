@@ -1,5 +1,5 @@
 import { Types } from "mongoose"
-import Expense from "../models/expenseModel"
+import Expense from "../../models/expenseModel"
 
 
 const getEpenses = async (_: any, args: {user: Types.ObjectId}) => {

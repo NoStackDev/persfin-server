@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import IncomeCategory from "../models/incomeCategoryModel";
+import IncomeCategory from "../../models/incomeCategoryModel";
 
 const getIncomeCategories = async (_: any, args: { user: Types.ObjectId}) => {
     try {

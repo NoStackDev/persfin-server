@@ -1,5 +1,5 @@
-import Income from "../models/incomeModel";
-import IncomeCategory from "../models/incomeCategoryModel";
+import Income from "../../models/incomeModel";
+import IncomeCategory from "../../models/incomeCategoryModel";
 import { Types } from "mongoose";
 
 

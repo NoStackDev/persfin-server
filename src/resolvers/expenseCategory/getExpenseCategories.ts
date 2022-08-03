@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import ExpenseCategory from "../models/expenseCategoryModel";
+import ExpenseCategory from "../../models/expenseCategoryModel";
 
 
 

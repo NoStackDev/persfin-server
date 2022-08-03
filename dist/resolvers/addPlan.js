@@ -7,32 +7,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mongoose from "mongoose";
 import Plan from "../models/planModel";
 import Expense from "../models/expenseModel";
 const addPlan = (_, args) => __awaiter(void 0, void 0, void 0, function* () {
-    let expensesId = []; // needed to clean up saved expense objs when an error is caught
+    const expensesFailSafe = [];
     try {
-        const plan = new Plan({
-            title: args.title,
-            total: args.total,
-            description: args.description
-        });
-        const expenses = [];
-        args.expenses.forEach((expenseObj) => __awaiter(void 0, void 0, void 0, function* () {
-            const expense = new Expense(Object.assign({}, expenseObj));
-            expensesId.push(expense._id);
-            expense.category = new mongoose.Types.ObjectId(expenseObj.categoryId);
-            expense.plan = plan._id;
-            expenses.push(expense._doc);
+        const plan = new Plan(Object.assign({}, args));
+        yield plan.populate('user');
+        const _expenses = args.expenses.map((_expense) => __awaiter(void 0, void 0, void 0, function* () {
+            const expense = new Expense(Object.assign(Object.assign({}, _expense), { plan: plan._id, user: args.user }));
+            expensesFailSafe.push(expense._id);
+            yield expense.populate('category');
             yield expense.save();
+            return expense._doc;
         }));
         yield plan.save();
-        return Object.assign(Object.assign({ id: plan._id }, plan._doc), { expenses });
+        return Object.assign(Object.assign({}, plan._doc), { expenses: _expenses });
     }
     catch (err) {
-        expensesId.forEach((expenseId) => __awaiter(void 0, void 0, void 0, function* () {
-            yield Expense.findByIdAndDelete(expenseId);
+        expensesFailSafe.forEach((expense) => __awaiter(void 0, void 0, void 0, function* () {
+            yield Expense.findByIdAndDelete(expense);
         }));
         console.log(err.message);
     }

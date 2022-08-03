@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import IncomeCategory from "../models/incomeCategoryModel";
+import IncomeCategory from "../../models/incomeCategoryModel";
 
 
 const addIncomeCategory = async (_:any, args: {title: string, description: string, user: Types.ObjectId}) => {

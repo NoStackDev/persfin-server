@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
-import Expense from "../models/expenseModel";
-import ExpenseCategory from "../models/expenseCategoryModel";
-import User from "../models/userModel";
+import Expense from "../../models/expenseModel";
+import ExpenseCategory from "../../models/expenseCategoryModel";
+import User from "../../models/userModel";
 
 
 const addExpense = async (_: any, args: {amount: number, description: string, user: Types.ObjectId, category: Types.ObjectId}) => {

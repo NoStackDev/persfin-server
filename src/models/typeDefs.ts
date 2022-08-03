@@ -55,6 +55,7 @@ const typeDefs = gql`
 
 
 
+
     type Query {
         users: [User]
         incomes(user: ID): [Income]
@@ -67,7 +68,7 @@ const typeDefs = gql`
     input ExpenseObjArray {
         amount: Float
         description: String
-        categoryId: ID
+        category: ID
     }
 
     type Mutation {
