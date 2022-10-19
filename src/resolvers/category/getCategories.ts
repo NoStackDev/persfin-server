@@ -1,11 +1,11 @@
 import { Types } from "mongoose";
-import ExpenseCategory from "../../models/expenseCategoryModel";
+import Category from "../../models/categoryModel";
 
 
 
-const getExpenseCategories = async (_: any, args: {user: Types.ObjectId}) => {
+const getCategories = async (_: any, args: {user: Types.ObjectId}) => {
     try {
-        const _categories = await ExpenseCategory.find({user: args.user})
+        const _categories = await Category.find({user: args.user})
         const categoriesUserPromises = _categories.map(async _category => {
             return await _category.populate('user')
         } )
@@ -16,4 +16,4 @@ const getExpenseCategories = async (_: any, args: {user: Types.ObjectId}) => {
     }
 }
 
-export default getExpenseCategories
+export default getCategories

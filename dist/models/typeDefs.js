@@ -1,81 +1,99 @@
 import { gql } from "apollo-server-core";
 const typeDefs = gql `
+  type User {
+    _id: ID
+    firstname: String
+    lastname: String
+    othernames: String
+    email: String
+  }
 
-    type User {
-        _id: ID
-        firstname: String
-        lastname: String
-        othernames: String
-        email: String
-    }
+  type Transaction {
+    _id: ID
+    user: User
+    title: String
+    amount: Float!
+    transactionType: String
+    category: Category
+    budget: ID
+    description: String
+    receiptImage: [String]
+  }
 
-    type Income {
-        _id: ID
-        user: User
-        amount: Float!
-        category: IncomeCategory
-        description: String
-    }
+  type Category {
+    _id: ID
+    user: User
+    title: String
+    transactionType: String
+    description: String
+  }
 
-    type Expense {
-        _id: ID
-        user: User
-        amount: Float!
-        category: ExpenseCategory
-        description: String
-        receiptImage: String
-        plan: Plan
-    }
+  type BudgetItem {
+    _id: ID
+    title: String
+    amount: Float
+    balance: Float
+    category: ID
+    description: String
+  }
 
-    type IncomeCategory {
-        _id: ID
-        user: User
-        title: String
-        description: String
-    }
-
-    type ExpenseCategory {
-        _id: ID
-        user: User
-        title: String
-        description: String
-    }
-
-    type Plan {
-        _id: ID
-        user: User
-        title: String
-        total: Float
-        description: String
-        expenses: [Expense]
-    }
+  type Budget {
+    _id: ID
+    user: User
+    title: String
+    total: Float
+    balance: Float
+    description: String
+    items: [BudgetItem]
+  }
 
 
+  type Query {
+    users: [User]
+    categories(user: ID): [Category]
+    transactions(user: ID): [Transaction]
+    budgets(user: ID): [Budget]
+  }
 
+  input BudgetItemInput {
+    title: String
+    amount: Float
+    category: ID
+    description: String
+  }
 
-    type Query {
-        users: [User]
-        incomes(user: ID): [Income]
-        incomeCategories(user: ID): [IncomeCategory]
-        expenses(user: ID): [Expense]
-        expenseCategories(user: ID): [ExpenseCategory]
-        plans(user: ID): [Plan]
-    }
-
-    input ExpenseObjArray {
-        amount: Float
-        description: String
-        category: ID
-    }
-
-    type Mutation {
-        addUser(firstname: String, lastname: String, othername: String, email: String, password: String): User
-        addIncome(amount: Float, description: String, user: ID, category: ID): Income
-        addIncomeCategory(title: String, description: String, user: ID): IncomeCategory
-        addExpense(amount: Float, description: String, user: ID, category: ID): Expense
-        addExpenseCategory(title: String, description: String, user: ID): ExpenseCategory
-        addPlan(title: String, total: Float, expenses: [ExpenseObjArray], description: String, user: ID): Plan
-    }
-
+  type Mutation {
+    addUser(
+      firstname: String
+      lastname: String
+      othername: String
+      email: String
+      password: String
+    ): User
+    addTransaction(
+      user: ID
+      title: String
+      amount: Float
+      transactionType: String
+      category: ID
+      budget: ID
+      item: ID
+      description: String
+      receiptImage: [String]
+    ): Transaction
+    addCategory(
+      title: String
+      transactionType: String
+      description: String
+      user: ID
+    ): Category
+    addBudget(
+      title: String
+      total: Float
+      items: [BudgetItemInput]
+      description: String
+      user: ID
+    ): Budget
+  }
 `;
 export default typeDefs;

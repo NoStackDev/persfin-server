@@ -13,9 +13,15 @@ const PlanSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    items: {
+        type: [mongoose.SchemaTypes.Mixed]
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    balance: {
+        type: Number
     }
 }, { timestamps: true });
 export default mongoose.model("Plan", PlanSchema);

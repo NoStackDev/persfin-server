@@ -13,11 +13,13 @@ import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import mongoose from "mongoose";
 import typeDefs from "./models/typeDefs";
+import morgan from "morgan";
 import resolvers from "./resolvers";
 const listen = (PORT) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const app = express();
         const httpServer = http.createServer(app);
+        app.use(morgan("common"));
         const server = new ApolloServer({
             typeDefs,
             resolvers,
@@ -26,7 +28,7 @@ const listen = (PORT) => __awaiter(void 0, void 0, void 0, function* () {
         yield server.start();
         server.applyMiddleware({ app });
         return new Promise((resolve, reject) => {
-            httpServer.listen(PORT).once('listening', resolve).once('error', reject);
+            httpServer.listen(PORT).once("listening", resolve).once("error", reject);
         });
     }
     catch (err) {
@@ -35,12 +37,12 @@ const listen = (PORT) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose.connect('mongodb://127.0.0.1:27017/persfin');
+        yield mongoose.connect("mongodb://127.0.0.1:27017/persfin");
         yield listen(4000);
-        console.log('🚀 Server is ready at http://localhost:4000/graphql');
+        console.log("🚀 Server is ready at http://localhost:4000/graphql");
     }
     catch (err) {
-        console.error('💀 Error starting the node server', err);
+        console.error("💀 Error starting the node server", err);
     }
 });
 main();

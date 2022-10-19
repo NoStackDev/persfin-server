@@ -1,30 +1,22 @@
 import { users, addUser } from "./user";
-import { addIncome, incomes } from "./income";
-import { addIncomeCategory, incomeCategories } from "./incomeCategory";
-import { addExpense, expenses } from "./expense";
-import { addExpenseCategory, expenseCategories } from "./expenseCategory";
-import { addPlan, plans } from "./plan";
-
-
+import { addCategory, categories } from "./category";
+import { addTransaction, transactions } from "./transaction";
+import { addBudget, budgets } from "./budget";
 
 const resolvers = {
-    Query: {
-        users,
-        incomes,
-        incomeCategories,
-        expenses,
-        expenseCategories,
-        plans
-    },
+  Query: {
+    users,
+    categories,
+    transactions,
+    budgets
+  },
 
-    Mutation: {
-        addUser,
-        addIncome,
-        addIncomeCategory,
-        addExpense,
-        addExpenseCategory,
-        addPlan
-    }
-}
+  Mutation: {
+    addUser,
+    addCategory,
+    addTransaction,
+    addBudget
+  },
+};
 
-export default resolvers
+export default resolvers;

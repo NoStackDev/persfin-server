@@ -1,25 +1,24 @@
 import mongoose from "mongoose";
 const IncomeSchema = new mongoose.Schema({
     amount: {
-        type: Number
+        type: Number,
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "IncomeCategory"
+        ref: "IncomeCategory",
     },
     time: {
-        type: Date
-    },
-    recurring: {
-        isRecurring: { type: Boolean, default: false },
-        recurEvery: { type: Date }
+        type: Date,
     },
     description: {
-        type: String
+        type: String,
+    },
+    receiptImage: {
+        type: String,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }
+        ref: "User",
+    },
 }, { timestamps: true });
 export default mongoose.model("Income", IncomeSchema);
