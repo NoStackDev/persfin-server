@@ -7,7 +7,7 @@ const CategorySchema = new mongoose.Schema<CategoryInterface>(
       type: String,
       required: true,
     },
-    transactionType: {
+    categoryType: {
       type: String,
       enum: ["inflow", "outflow"],
       default: "inflow",

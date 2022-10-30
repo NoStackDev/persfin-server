@@ -1,8 +1,8 @@
-import Transaction from "../../models/transactionModel";
+import Outflow from "../../models/outflowModel";
 import Budget from "../../models/budgetModel";
 import { Types } from "mongoose";
 
-const addTransaction = async (
+const addOutflow = async (
   _: any,
   args: {
     title: string;
@@ -17,7 +17,7 @@ const addTransaction = async (
   }
 ) => {
   try {
-    const transaction = new Transaction({ ...args });
+    const outflow = new Outflow({ ...args });
 
     if (args.budget) {
       const budget = await Budget.findById(args.budget);
@@ -42,15 +42,15 @@ const addTransaction = async (
       budget.save();
     }
 
-    await transaction.populate("category");
-    await transaction.populate("budget");
-    await transaction.populate("user");
+    await outflow.populate("category");
+    await outflow.populate("budget");
+    await outflow.populate("user");
 
-    await transaction.save();
-    return transaction;
+    await outflow.save();
+    return outflow;
   } catch (err: any) {
     console.log(err.message);
   }
 };
 
-export default addTransaction;
+export default addOutflow;

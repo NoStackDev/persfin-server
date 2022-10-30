@@ -1,21 +1,27 @@
 import { users, addUser } from "./user";
 import { addCategory, categories } from "./category";
-import { addTransaction, transactions } from "./transaction";
+import { addInflow, inflows } from "./inflow";
+import { addOutflow, outflows } from "./outflow";
+import { addSavings, savings } from "./savings";
 import { addBudget, budgets } from "./budget";
 
 const resolvers = {
   Query: {
     users,
     categories,
-    transactions,
-    budgets
+    inflows,
+    outflows,
+    savings,
+    budgets,
   },
 
   Mutation: {
     addUser,
     addCategory,
-    addTransaction,
-    addBudget
+    addInflow,
+    addOutflow,
+    addSavings,
+    addBudget,
   },
 };
 

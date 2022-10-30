@@ -33,21 +33,30 @@ export interface BudgetInterface extends DocumentResult<BudgetInterface> {
 
 export interface CategoryInterface extends DocumentResult<CategoryInterface> {
   title: string;
-  transactionType: string;
+  categoryType: string;
   description?: string;
 }
 
-export interface TransactionInterface
-  extends DocumentResult<TransactionInterface> {
+export interface InflowInterface extends DocumentResult<InflowInterface> {
   title: string;
   amount: number;
-  transactionType: string;
+  category: Types.ObjectId;
+  description: string;
+  receiptImage: string[];
+  time: Date
+}
+
+export interface OutflowInterface extends DocumentResult<OutflowInterface> {
+  title: string;
+  amount: number;
   category: Types.ObjectId;
   budget: Types.ObjectId;
   description: string;
   receiptImage: string[];
+  time: Date
 }
 
-export interface SavingInterface extends DocumentResult<SavingInterface> {
+export interface SavingsInterface extends DocumentResult<SavingsInterface> {
   amount: number;
+  time: Date
 }

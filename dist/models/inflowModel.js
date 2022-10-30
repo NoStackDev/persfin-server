@@ -1,24 +1,30 @@
 import mongoose from "mongoose";
-const IncomeSchema = new mongoose.Schema({
+const InflowSchema = new mongoose.Schema({
+    title: {
+        type: String,
+    },
     amount: {
-        type: Number
+        type: Number,
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "IncomeCategory"
-    },
-    time: {
-        type: Date
-    },
-    recurring: {
-        type: Boolean,
-        default: false,
-        recur: {
-            type: Date
-        }
+        ref: "Category",
     },
     description: {
-        type: String
+        type: String,
+    },
+    receiptImage: {
+        type: [String],
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    time: {
+        type: Date,
+        default: () => {
+            return new Date(new Date('2022-07').getTime() + Math.ceil(Math.random() * (1000 * 60 * 60 * 24 * 30 * 4)));
+        }
     }
 }, { timestamps: true });
-export default mongoose.model("Income", IncomeSchema);
+export default mongoose.model("Inflow", InflowSchema);

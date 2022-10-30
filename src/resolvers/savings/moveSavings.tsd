@@ -1,0 +1,9 @@
+// import Savings from "../../models/savingsModel";
+// import Inflow from "../../models/inflowModel";
+// import { Types } from "mongoose";
+
+// const moveSavings = async (_: any, args: {user: Types.ObjectId, amount: number}) {
+//     try {
+//         const 
+//     }
+// }

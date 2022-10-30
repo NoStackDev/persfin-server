@@ -1,18 +1,13 @@
 import mongoose from "mongoose";
-import { TransactionInterface } from "./interfaces";
+import { OutflowInterface } from "./interfaces";
 
-const TransactionSchema = new mongoose.Schema<TransactionInterface>(
+const OutflowSchema = new mongoose.Schema<OutflowInterface>(
   {
     title: {
       type: String,
     },
     amount: {
       type: Number,
-    },
-    transactionType: {
-      type: String,
-      enum: ["inflow", "outflow", "savings"],
-      default: "inflow",
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
@@ -33,11 +28,17 @@ const TransactionSchema = new mongoose.Schema<TransactionInterface>(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    time: {
+      type: Date,
+      default: () => {
+        return new Date(new Date('2022-07').getTime() + Math.ceil(Math.random()*(1000*60*60*24*30*4)))
+      }
+    }
   },
   { timestamps: true }
 );
 
-export default mongoose.model<TransactionInterface>(
-  "Transaction",
-  TransactionSchema
+export default mongoose.model<OutflowInterface>(
+  "Outflow",
+  OutflowSchema
 );

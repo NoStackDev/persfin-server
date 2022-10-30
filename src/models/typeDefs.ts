@@ -9,23 +9,44 @@ const typeDefs = gql`
     email: String
   }
 
-  type Transaction {
+  type Inflow {
     _id: ID
     user: User
     title: String
-    amount: Float!
-    transactionType: String
+    amount: Float
+    category: Category
+    description: String
+    receiptImage: [String]
+    createdAt: String
+    time: String
+  }
+
+  type Outflow {
+    _id: ID
+    user: User
+    title: String
+    amount: Float
     category: Category
     budget: ID
     description: String
     receiptImage: [String]
+    createdAt: String
+    time: String
+  }
+
+  type Savings {
+    _id: ID
+    user: User
+    amount: Float
+    time: String
+    createdAt: String
   }
 
   type Category {
     _id: ID
     user: User
     title: String
-    transactionType: String
+    categoryType: String
     description: String
   }
 
@@ -48,11 +69,12 @@ const typeDefs = gql`
     items: [BudgetItem]
   }
 
-
   type Query {
     users: [User]
+    inflows(user: ID): [Inflow]
+    outflows(user: ID): [Outflow]
+    savings(user: ID): [Savings]
     categories(user: ID): [Category]
-    transactions(user: ID): [Transaction]
     budgets(user: ID): [Budget]
   }
 
@@ -71,20 +93,28 @@ const typeDefs = gql`
       email: String
       password: String
     ): User
-    addTransaction(
+    addInflow(
       user: ID
       title: String
       amount: Float
-      transactionType: String
+      category: ID
+      description: String
+      receiptImage: [String]
+    ): Inflow
+    addOutflow(
+      user: ID
+      title: String
+      amount: Float
       category: ID
       budget: ID
       item: ID
       description: String
       receiptImage: [String]
-    ): Transaction
+    ): Outflow
+    addSavings(user: ID, amount: Float): Savings
     addCategory(
       title: String
-      transactionType: String
+      categoryType: String
       description: String
       user: ID
     ): Category
