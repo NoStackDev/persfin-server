@@ -1,4 +1,4 @@
-import { users, addUser } from "./user";
+import { user, users, addUser } from "./user";
 import { addCategory, categories } from "./category";
 import { addInflow, inflows } from "./inflow";
 import { addOutflow, outflows } from "./outflow";
@@ -7,6 +7,7 @@ import { addBudget, budgets } from "./budget";
 
 const resolvers = {
   Query: {
+    user,
     users,
     categories,
     inflows,

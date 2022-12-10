@@ -14,10 +14,13 @@ const SavingsSchema = new mongoose.Schema<SavingsInterface>(
       type: Date,
       default: () => {
         return new Date(
-          new Date("2022-07").getTime() +
-            Math.ceil(Math.random() * (1000 * 60 * 60 * 24 * 30 * 4))
+          Date.now()
         );
       },
+    },
+    modelType: {
+      type: String,
+      enum: ["savings"],
     },
   },
   { timestamps: true }

@@ -18,6 +18,10 @@ const OutflowSchema = new mongoose.Schema<OutflowInterface>(
       ref: "Budget",
       default: null,
     },
+    item: {
+      type: mongoose.Schema.Types.ObjectId,
+      default: null,
+    },
     description: {
       type: String,
     },
@@ -31,14 +35,15 @@ const OutflowSchema = new mongoose.Schema<OutflowInterface>(
     time: {
       type: Date,
       default: () => {
-        return new Date(new Date('2022-07').getTime() + Math.ceil(Math.random()*(1000*60*60*24*30*4)))
-      }
-    }
+        return new Date(Date.now());
+      },
+    },
+    modelType: {
+      type: String,
+      enum: ["outflow"],
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<OutflowInterface>(
-  "Outflow",
-  OutflowSchema
-);
+export default mongoose.model<OutflowInterface>("Outflow", OutflowSchema);

@@ -10,6 +10,7 @@ const addInflow = async (
     receiptImage: string[];
     user: Types.ObjectId;
     category: Types.ObjectId;
+    modelType: string;
   }
 ) => {
   try {

@@ -15,6 +15,7 @@ const addBudget = async (
       description: string;
       category: Types.ObjectId;
     }[];
+    modelType: string;
   }
 ) => {
   try {

@@ -14,6 +14,7 @@ export interface UserInterface extends DocumentResult<UserInterface> {
   othernames?: string;
   email: string;
   password: string;
+  profilePic: string;
 }
 
 export interface BudgetInterface extends DocumentResult<BudgetInterface> {
@@ -21,6 +22,7 @@ export interface BudgetInterface extends DocumentResult<BudgetInterface> {
   total: number;
   balance: number;
   description?: string;
+  status: string;
   items: {
     title: string;
     description: string;
@@ -29,6 +31,9 @@ export interface BudgetInterface extends DocumentResult<BudgetInterface> {
     balance: number;
     _id: Types.ObjectId;
   }[];
+  time: Date;
+  modelType: string;
+  completed: boolean;
 }
 
 export interface CategoryInterface extends DocumentResult<CategoryInterface> {
@@ -43,7 +48,8 @@ export interface InflowInterface extends DocumentResult<InflowInterface> {
   category: Types.ObjectId;
   description: string;
   receiptImage: string[];
-  time: Date
+  time: Date;
+  modelType: string;
 }
 
 export interface OutflowInterface extends DocumentResult<OutflowInterface> {
@@ -51,12 +57,15 @@ export interface OutflowInterface extends DocumentResult<OutflowInterface> {
   amount: number;
   category: Types.ObjectId;
   budget: Types.ObjectId;
+  item: Types.ObjectId;
   description: string;
   receiptImage: string[];
-  time: Date
+  time: Date;
+  modelType: string;
 }
 
 export interface SavingsInterface extends DocumentResult<SavingsInterface> {
   amount: number;
-  time: Date
+  time: Date;
+  modelType: string;
 }

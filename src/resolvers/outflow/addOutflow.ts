@@ -14,6 +14,7 @@ const addOutflow = async (
     receiptImage: string[];
     user: Types.ObjectId;
     category: Types.ObjectId;
+    modelType: string;
   }
 ) => {
   try {
@@ -31,6 +32,8 @@ const addOutflow = async (
       const itemId = args.item.toString();
       budget.items.map((item) => {
         if (item._id.toString() === itemId) {
+          outflow.category = item.category;
+          outflow.item = args.item;
           itemExist = true;
           item.balance = item.balance - args.amount;
         }

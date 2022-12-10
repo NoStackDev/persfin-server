@@ -12,11 +12,15 @@ const BudgetSchema = new mongoose.Schema<BudgetInterface>(
     balance: {
       type: Number,
       default: (doc) => {
-        return doc.total
-      }
+        return doc.total;
+      },
     },
     description: {
       type: String,
+    },
+    status: {
+      type: String,
+      default: "completed",
     },
     items: [
       {
@@ -30,14 +34,28 @@ const BudgetSchema = new mongoose.Schema<BudgetInterface>(
         balance: {
           type: Number,
           default: (itemDoc) => {
-            return itemDoc.amount
-          }
-        }
+            return itemDoc.amount;
+          },
+        },
       },
     ],
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    time: {
+      type: Date,
+      default: () => {
+        return new Date(Date.now());
+      },
+    },
+    modelType: {
+      type: String,
+      enum: ["budget"],
+    },
+    completed: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

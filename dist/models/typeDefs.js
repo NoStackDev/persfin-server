@@ -6,6 +6,7 @@ const typeDefs = gql `
     lastname: String
     othernames: String
     email: String
+    profilePic: String
   }
 
   type Inflow {
@@ -18,6 +19,7 @@ const typeDefs = gql `
     receiptImage: [String]
     createdAt: String
     time: String
+    modelType: String
   }
 
   type Outflow {
@@ -27,10 +29,12 @@ const typeDefs = gql `
     amount: Float
     category: Category
     budget: ID
+    item: ID
     description: String
     receiptImage: [String]
     createdAt: String
     time: String
+    modelType: String
   }
 
   type Savings {
@@ -39,6 +43,7 @@ const typeDefs = gql `
     amount: Float
     time: String
     createdAt: String
+    modelType: String
   }
 
   type Category {
@@ -53,8 +58,8 @@ const typeDefs = gql `
     _id: ID
     title: String
     amount: Float
-    balance: Float
     category: ID
+    balance: Float
     description: String
   }
 
@@ -64,12 +69,17 @@ const typeDefs = gql `
     title: String
     total: Float
     balance: Float
+    status: String
     description: String
     items: [BudgetItem]
+    time: String
+    modelType: String
+    completed: Boolean
   }
 
   type Query {
     users: [User]
+    user(user: ID): User
     inflows(user: ID): [Inflow]
     outflows(user: ID): [Outflow]
     savings(user: ID): [Savings]
@@ -99,6 +109,7 @@ const typeDefs = gql `
       category: ID
       description: String
       receiptImage: [String]
+      modelType: String
     ): Inflow
     addOutflow(
       user: ID
@@ -109,8 +120,9 @@ const typeDefs = gql `
       item: ID
       description: String
       receiptImage: [String]
+      modelType: String
     ): Outflow
-    addSavings(user: ID, amount: Float): Savings
+    addSavings(user: ID, amount: Float, modelType: String): Savings
     addCategory(
       title: String
       categoryType: String
@@ -123,6 +135,7 @@ const typeDefs = gql `
       items: [BudgetItemInput]
       description: String
       user: ID
+      modelType: String
     ): Budget
   }
 `;
