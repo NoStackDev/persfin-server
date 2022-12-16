@@ -37,7 +37,9 @@ const OutflowSchema = new mongoose.Schema({
     },
     modelType: {
         type: String,
-        enum: ["outflow"],
+        default: () => {
+            return "outflow";
+        },
     },
 }, { timestamps: true });
 export default mongoose.model("Outflow", OutflowSchema);

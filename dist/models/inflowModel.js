@@ -28,7 +28,9 @@ const InflowSchema = new mongoose.Schema({
     },
     modelType: {
         type: String,
-        enum: ["inflow"],
+        default: () => {
+            return "inflow";
+        },
     },
 }, { timestamps: true });
 export default mongoose.model("Inflow", InflowSchema);

@@ -52,6 +52,8 @@ const typeDefs = gql `
     title: String
     categoryType: String
     description: String
+    createdAt: String
+    modelType: String
   }
 
   type BudgetItem {
@@ -75,6 +77,7 @@ const typeDefs = gql `
     time: String
     modelType: String
     completed: Boolean
+    createdAt: String
   }
 
   type Query {

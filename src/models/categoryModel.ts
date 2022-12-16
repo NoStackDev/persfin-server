@@ -19,6 +19,12 @@ const CategorySchema = new mongoose.Schema<CategoryInterface>(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    modelType: {
+      type: String,
+      default: () => {
+        return "category";
+      },
+    },
   },
   { timestamps: true }
 );

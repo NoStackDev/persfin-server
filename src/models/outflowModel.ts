@@ -40,7 +40,9 @@ const OutflowSchema = new mongoose.Schema<OutflowInterface>(
     },
     modelType: {
       type: String,
-      enum: ["outflow"],
+      default: () => {
+        return "outflow";
+      },
     },
   },
   { timestamps: true }

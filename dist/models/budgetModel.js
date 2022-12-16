@@ -48,7 +48,9 @@ const BudgetSchema = new mongoose.Schema({
     },
     modelType: {
         type: String,
-        enum: ["budget"],
+        default: () => {
+            return "budget";
+        },
     },
     completed: {
         type: Boolean,

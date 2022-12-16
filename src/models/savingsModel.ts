@@ -13,14 +13,14 @@ const SavingsSchema = new mongoose.Schema<SavingsInterface>(
     time: {
       type: Date,
       default: () => {
-        return new Date(
-          Date.now()
-        );
+        return new Date(Date.now());
       },
     },
     modelType: {
       type: String,
-      enum: ["savings"],
+      default: () => {
+        return "savings";
+      },
     },
   },
   { timestamps: true }

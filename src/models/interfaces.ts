@@ -40,6 +40,7 @@ export interface CategoryInterface extends DocumentResult<CategoryInterface> {
   title: string;
   categoryType: string;
   description?: string;
+  modelType: string;
 }
 
 export interface InflowInterface extends DocumentResult<InflowInterface> {

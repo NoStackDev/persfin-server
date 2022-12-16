@@ -15,7 +15,9 @@ const SavingsSchema = new mongoose.Schema({
     },
     modelType: {
         type: String,
-        enum: ["savings"],
+        default: () => {
+            return "savings";
+        },
     },
 }, { timestamps: true });
 export default mongoose.model("Savings", SavingsSchema);
