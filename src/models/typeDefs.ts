@@ -113,7 +113,6 @@ const typeDefs = gql`
       category: ID
       description: String
       receiptImage: [String]
-      modelType: String
     ): Inflow
     addOutflow(
       user: ID
@@ -124,7 +123,6 @@ const typeDefs = gql`
       item: ID
       description: String
       receiptImage: [String]
-      modelType: String
     ): Outflow
     addSavings(user: ID, amount: Float, modelType: String): Savings
     addCategory(
@@ -139,8 +137,8 @@ const typeDefs = gql`
       items: [BudgetItemInput]
       description: String
       user: ID
-      modelType: String
     ): Budget
+    deleteBudget(budget: ID): Budget
   }
 `;
 export default typeDefs;

@@ -3,7 +3,7 @@ import { addCategory, categories } from "./category";
 import { addInflow, inflows } from "./inflow";
 import { addOutflow, outflows } from "./outflow";
 import { addSavings, savings } from "./savings";
-import { addBudget, budgets } from "./budget";
+import { addBudget, deleteBudget, budgets } from "./budget";
 
 const resolvers = {
   Query: {
@@ -23,6 +23,7 @@ const resolvers = {
     addOutflow,
     addSavings,
     addBudget,
+    deleteBudget,
   },
 };
 

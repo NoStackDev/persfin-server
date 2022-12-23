@@ -1,6 +1,5 @@
 import { Types } from "mongoose";
 import Budget from "../../models/budgetModel";
-// import Transaction from "../../models/transactionModel";
 
 const addBudget = async (
   _: any,
