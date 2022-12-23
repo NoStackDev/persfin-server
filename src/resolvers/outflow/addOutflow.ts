@@ -26,7 +26,12 @@ const addOutflow = async (
       if (!budget) {
         throw new Error("Budget does not exist");
       }
+
       budget.balance = budget.balance - args.amount;
+
+      if (budget.balance === 0) {
+        budget.completed = true;
+      }
 
       let itemExist = false;
       const itemId = args.item.toString();
