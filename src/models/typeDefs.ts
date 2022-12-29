@@ -53,6 +53,7 @@ const typeDefs = gql`
     title: String
     categoryType: String
     description: String
+    time: String
     createdAt: String
     modelType: String
   }
@@ -130,6 +131,12 @@ const typeDefs = gql`
       categoryType: String
       description: String
       user: ID
+    ): Category
+    deleteCategory(category: ID): Category
+    updateCategory(
+      categoryId: ID
+      title: String
+      description: String
     ): Category
     addBudget(
       title: String

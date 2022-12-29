@@ -9,7 +9,7 @@ const deleteBudget = async (
 ) => {
   try {
     const deletedBudget = await Budget.findByIdAndDelete(args.budget);
-    return deleteBudget;
+    return deletedBudget;
   } catch (err: any) {
     console.log(err.message);
   }

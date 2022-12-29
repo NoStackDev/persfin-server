@@ -1,5 +1,10 @@
 import { user, users, addUser } from "./user";
-import { addCategory, categories } from "./category";
+import {
+  addCategory,
+  deleteCategory,
+  updateCategory,
+  categories,
+} from "./category";
 import { addInflow, inflows } from "./inflow";
 import { addOutflow, outflows } from "./outflow";
 import { addSavings, savings } from "./savings";
@@ -19,6 +24,8 @@ const resolvers = {
   Mutation: {
     addUser,
     addCategory,
+    deleteCategory,
+    updateCategory,
     addInflow,
     addOutflow,
     addSavings,

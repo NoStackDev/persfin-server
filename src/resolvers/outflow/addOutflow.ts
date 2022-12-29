@@ -29,10 +29,6 @@ const addOutflow = async (
 
       budget.balance = budget.balance - args.amount;
 
-      if (budget.balance === 0) {
-        budget.completed = true;
-      }
-
       let itemExist = false;
       const itemId = args.item.toString();
       budget.items.map((item) => {
@@ -43,8 +39,13 @@ const addOutflow = async (
           item.balance = item.balance - args.amount;
         }
       });
+
       if (!itemExist) {
         throw new Error("Item does not exist in Budget");
+      }
+
+      if (budget.balance === 0) {
+        budget.completed = true;
       }
 
       budget.save();

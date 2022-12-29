@@ -41,6 +41,7 @@ export interface CategoryInterface extends DocumentResult<CategoryInterface> {
   categoryType: string;
   description?: string;
   modelType: string;
+  time: Date;
 }
 
 export interface InflowInterface extends DocumentResult<InflowInterface> {

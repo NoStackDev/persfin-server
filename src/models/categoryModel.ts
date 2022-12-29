@@ -25,6 +25,12 @@ const CategorySchema = new mongoose.Schema<CategoryInterface>(
         return "category";
       },
     },
+    time: {
+      type: Date,
+      default: () => {
+        return new Date(Date.now());
+      },
+    },
   },
   { timestamps: true }
 );
