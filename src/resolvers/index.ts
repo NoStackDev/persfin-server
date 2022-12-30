@@ -8,7 +8,7 @@ import {
 import { addInflow, inflows } from "./inflow";
 import { addOutflow, outflows } from "./outflow";
 import { addSavings, savings } from "./savings";
-import { addBudget, deleteBudget, budgets } from "./budget";
+import { addBudget, deleteBudget, updateBudget, budgets } from "./budget";
 
 const resolvers = {
   Query: {
@@ -30,6 +30,7 @@ const resolvers = {
     addOutflow,
     addSavings,
     addBudget,
+    updateBudget,
     deleteBudget,
   },
 };

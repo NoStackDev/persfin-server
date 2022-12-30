@@ -93,8 +93,10 @@ const typeDefs = gql`
   }
 
   input BudgetItemInput {
+    _id: ID
     title: String
     amount: Float
+    balance: Float
     category: ID
     description: String
   }
@@ -146,6 +148,14 @@ const typeDefs = gql`
       user: ID
     ): Budget
     deleteBudget(budget: ID): Budget
+    updateBudget(
+      budgetId: ID
+      title: String
+      total: Float
+      balance: Float
+      description: String
+      items: [BudgetItemInput]
+    ): Budget
   }
 `;
 export default typeDefs;
